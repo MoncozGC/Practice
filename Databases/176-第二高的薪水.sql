@@ -15,6 +15,13 @@
 | 200                 |
 +---------------------+
 
-来源：力扣（LeetCode）
-链接：https://leetcode-cn.com/problems/second-highest-salary
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+# 使用临时表方式，将不同的薪资按降序排序，然后使用LIMIT字句获得第二高的薪资，如果没有第二高的需要方法NULL，所以使用IFNULL语句进行嵌套
+SELECT IFNULL((
+	SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT 1,1,NULL)) 
+AS SecondHighestSalary
+
+IFNULL(a,b)函数解释：
+
+如果value1不是空，结果返回a
+
+如果value1是空，结果返回b
