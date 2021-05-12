@@ -1,4 +1,4 @@
-package algorithms;
+package com.moncozgc.algorithms;
 
 class ListNodeTestFun {        //类名 ：Java类就是一种自定义的数据结构
     int val;            //数据 ：节点数据 
