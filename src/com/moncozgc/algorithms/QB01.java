@@ -1,4 +1,4 @@
-package com.moncozgc.algorithms;
+package com.moncozgc.test.algorithms;
 
 import java.util.HashMap;
 
