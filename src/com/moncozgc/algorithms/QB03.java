@@ -1,4 +1,4 @@
-package com.moncozgc.test.algorithms;
+package com.moncozgc.algorithms;
 
 
 import java.util.HashSet;

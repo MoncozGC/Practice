@@ -1,4 +1,4 @@
-package com.moncozgc.test.algorithms
+package com.moncozgc.algorithms
 
 /**
  * 使用 scala语言 解决QB09
