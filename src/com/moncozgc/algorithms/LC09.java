@@ -35,7 +35,7 @@ class Solution09 {
     }
 }
 
-public class QB09 {
+public class LC09 {
     public static void main(String[] args) {
         Solution09 solution09 = new Solution09();
         System.out.println(solution09.isPalindrome(12131));

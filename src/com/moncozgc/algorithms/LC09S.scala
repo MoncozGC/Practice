@@ -1,11 +1,11 @@
 package com.moncozgc.algorithms
 
 /**
- * 使用 scala语言 解决QB09
+ * 使用 scala语言 解决LC09
  *
  * Created by MoncozGC on 2021/4/27
  */
-class QB09SFun {
+class LC09SFun {
   def isPalindrome(x: Int): Boolean = {
     var cur = 0
     var res = x
@@ -20,9 +20,9 @@ class QB09SFun {
   }
 }
 
-object QB09S {
+object LC09S {
   def main(args: Array[String]): Unit = {
-    val qB09SFun = new QB09SFun
-    println(qB09SFun.isPalindrome(1213))
+    val LC09SFun = new LC09SFun
+    println(LC09SFun.isPalindrome(1213))
   }
 }

@@ -44,7 +44,7 @@ class Solution03 {
     }
 }
 
-public class QB03 {
+public class LC03 {
     public static void main(String[] args) {
         Solution03 solution = new Solution03();
         System.out.println(solution.lengthOfLongestSubstring("abcabcbb"));

@@ -68,7 +68,7 @@ class Solution07 {
     }
 }
 
-public class QB07 {
+public class LC07 {
     public static void main(String[] args) {
         Solution07 solution07 = new Solution07();
         int enter = -214748364;

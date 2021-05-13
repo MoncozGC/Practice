@@ -48,7 +48,7 @@ class Solution01 {
  * <p>
  * 13-11=2,改key存在, 方法2的下标0和11的下标2
  */
-public class QB01 {
+public class LC01 {
     public static void main(String[] args) {
         Solution01 solution01 = new Solution01();
         int nums[] = {2, 7, 11, 15};
