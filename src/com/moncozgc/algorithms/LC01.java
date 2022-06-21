@@ -1,5 +1,6 @@
 package com.moncozgc.algorithms;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -51,7 +52,7 @@ class Solution01 {
 public class LC01 {
     public static void main(String[] args) {
         Solution01 solution01 = new Solution01();
-        int nums[] = {2, 7, 11, 15};
-        System.out.println(solution01.twoSum(nums, 13));
+        int[] nums = {2, 7, 11, 15};
+        System.out.println(Arrays.toString(solution01.twoSum(nums, 13)));
     }
 }

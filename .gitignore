@@ -8,3 +8,7 @@ out
 *.yaml
 
 *.class
+
+# 暂时不控制
+algorithms
+datastructure
