@@ -3,16 +3,20 @@ package com.moncozgc.DataStructuresAtguigu;
 import java.util.Scanner;
 
 /**
- * 使用数组模拟队列
+ * 环形队列
  *
- * 1. 通过键盘输入已完成数组模拟队列情况. 缺陷: 不是一个环形队列
- * 2. 改造为环形队列  A03_CircleArrayQueueArray
+ * 1. front 变量的含义做一个调整: front 就指向队列的第一个元素,也就是说arr[front]就是队列的第一个元素, front的初始值= 0
+ * 2. rear 变量的含义做一个调整: rear 指向队列的最后- -个元素的后一位置.因为希望空出一个空间做为约定, rear的初始值=0
+ * 3. 当队列满时，条件是: (rear + 1) % maxSize= front [满]
+ * 4. 对队列为空的条件，rear == front [空]
+ * 5. 当我们这样分析，队列中有效的数据的个数: (rear + maxSize - front) % maxSize // eg:  rear= 1 front=0
+ * 6. 我们就可以在原来的队列上修改得到，一个环形队列
  *
- * Created by MoncozGC on 2022/6/20
+ * Created by MoncozGC on 2022/6/21
  */
-public class A02_QueueArray {
+public class A03_CircleArrayQueueArray {
     public static void main(String[] args) {
-        QueueArray queueArray = new QueueArray(3);
+        CircleQueueArray circleQueueArray = new CircleQueueArray(4);
         char key = ' ';
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
@@ -27,16 +31,16 @@ public class A02_QueueArray {
             key = scanner.next().charAt(0);//接收一个字符
             switch (key) {
                 case 's':
-                    queueArray.queryAll();
+                    circleQueueArray.queryAll();
                     break;
                 case 'a':
                     System.out.println("输出一个数");
                     int value = scanner.nextInt();
-                    queueArray.addData(value);
+                    circleQueueArray.addData(value);
                     break;
                 case 'g':
                     try {
-                        int res = queueArray.getQueue();
+                        int res = circleQueueArray.getQueue();
                         System.out.printf("取出的数据是%d\n: ", res);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -44,7 +48,7 @@ public class A02_QueueArray {
                     break;
                 case 'h':
                     try {
-                        int res = queueArray.headQueue();
+                        int res = circleQueueArray.headQueue();
                         System.out.printf("队列的头的数据是%d\n: ", res);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -52,7 +56,7 @@ public class A02_QueueArray {
                     break;
                 case 'd':
                     try {
-                        queueArray.clearAll();
+                        circleQueueArray.clearAll();
                         System.out.println("数据已清空..");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -72,7 +76,7 @@ public class A02_QueueArray {
 /**
  * 创建数组模拟队列
  */
-class QueueArray {
+class CircleQueueArray {
     // 数组的最大容量
     private int maxSize;
     // 头部 最前方
@@ -83,11 +87,9 @@ class QueueArray {
     private int[] arr;
 
     // 创建构造函数
-    public QueueArray(int arrMaxSize) {
+    public CircleQueueArray(int arrMaxSize) {
         maxSize = arrMaxSize;
         arr = new int[arrMaxSize];
-        front = -1;
-        rear = -1;
     }
 
     // 判断是否为空
@@ -97,18 +99,17 @@ class QueueArray {
 
     // 判断是否满了
     public boolean ifFull() {
-        return rear == maxSize - 1;
+        return (rear + 1) % maxSize == front;
     }
 
     // 添加数据
     public void addData(int x) {
         if (ifFull()) {
-            throw new RuntimeException("队列已满, 无法添加数据....");
+            System.out.println("队列已满，不能加入数据...");
+            return;
         }
-        // 尾部指向加一
-        rear++;
-        // 并且在该位置存放数据
         arr[rear] = x;
+        rear = (rear + 1) % maxSize;
     }
 
     // 获取数据
@@ -116,26 +117,35 @@ class QueueArray {
         if (ifEmpty()) {
             throw new RuntimeException("队列是空的, 无法加入数据...");
         }
-        front++;
-        return arr[front];
+        int value = arr[front];
+        front = (front + 1) % maxSize;
+        return value;
     }
 
+    // 获取头部数据
     public int headQueue() {
         if (ifEmpty()) {
             throw new RuntimeException("队列是空的, 无法查看数据...");
         }
-        return arr[front + 1];
+        return arr[front];
 
     }
 
     // 显示队列的所有数据
     public void queryAll() {
         if (ifEmpty()) {
-            throw new RuntimeException("队列是空的, 无法查看所有数据...");
+            System.out.println("队列是空的, 无法查看数据...");
+            return;
         }
-        for (int i = 0; i < arr.length; i++) {
-            System.out.printf("arr[%d] = %d\n", i, arr[i]);
+
+        for (int i = front; i < front + number(); i++) {
+            System.out.printf("arr[%d] = %d\n", i % maxSize, arr[i % maxSize]);
         }
+    }
+
+    // 获取有效个数
+    public int number() {
+        return (rear + maxSize - front) % maxSize;
     }
 
     // 清空所有数据
